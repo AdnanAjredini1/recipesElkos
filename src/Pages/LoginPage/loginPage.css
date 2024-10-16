@@ -1,0 +1,109 @@
+.loginPageWrapper{
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    .displayNone {
+        display: none;
+    }
+
+   
+   
+
+    .logini{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        border:1px solid #cfcbcb;
+        padding: 20px 30px;
+        border-radius: 10px;
+        margin-top: 150px;
+        .displayNone {
+            display: none;
+        }
+        .dontHaveAccountWrapper{
+            position: absolute;
+            display: flex;
+            gap: 10px;
+            bottom: -30px;
+            right: 0;
+
+            .signupLink{
+                color: rgb(6, 6, 223);
+            }
+    
+        }
+
+        .loginWithGoogleWrapper{
+            position: relative;
+            display: flex;
+            padding-inline: 10px;
+            justify-content: center;
+            align-items: center;
+            width: 390px;
+            height: 65px;
+            border:1px solid #cfcbcb;
+            border-radius: 10px;
+            .displayNone {
+                display: none;
+            }
+            
+            p{
+                text-align: center;
+                font-size: 18px;
+                font-weight: 500;
+            }
+
+            .googleIcon{
+                position: absolute;
+                left: 15px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        .orText{
+            font-size: 18px;
+            color: #8d8a8a;
+        }
+
+        .loginButton{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 390px;
+            height: 65px;
+            background:  #febd2f;
+            border-radius: 10px;
+
+
+            p{
+                color: #fff;
+                font-size: 24px;
+                font-weight: 600;
+            }
+        }
+          
+        .textWrapper{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            .welcomeText{
+                font-size: 28px;
+            }
+        }
+
+        .displayNone {
+            display: none;
+        }
+    }
+    
+}
