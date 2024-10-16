@@ -71,7 +71,7 @@
     border: 3px solid #febd2f;
     border-radius: 10px;
     background-color: #ffffff;
-    @media (max-width:608px) {
+    @media (max-width:698px) {
         display: none;
     }
 

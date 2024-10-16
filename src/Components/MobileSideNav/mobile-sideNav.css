@@ -46,7 +46,7 @@
             border: 3px solid #febd2f;
             border-radius: 10px;
             background-color: #ffffff;
-            @media (min-width:610px) {
+            @media (min-width:700px) {
                 display: none;
             }
         
@@ -110,7 +110,7 @@
     visibility: visible;
     transform: translateX(0);
 
-    @media (min-width:1202px) {
+    @media (min-width:882px) {
         display: none;
     }
 }

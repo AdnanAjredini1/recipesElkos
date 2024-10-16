@@ -8,6 +8,9 @@
   border: 2px solid #febd2f;
   border-radius: 10px;
   background-color: #ffffff;
+  @media (max-width:496px) {
+    width: 98%;
+}
 
   .searchInput {
     border: none;
