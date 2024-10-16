@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+
+.sideNavWrapper{
+    position: fixed;
+    top:0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    height: 100%;
+    width: 350px;
+    background: #ffffff;
+    @media (max-width:880px) {
+        display: none;
+      }
+
+    .sideNavButtonWrapper{
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .iconBrand{
+      margin-top: 20px;
+      text-align: center;
+      font-family: "Dancing Script";
+      font-size: 55px;
+      font-weight:bolder;
+    }
+
+    .sideNavProfileUserWrapper{
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .profilePosition{
+            text-align: center;
+            color: #706c6c;
+            font-size: 22px;
+            font-weight: 400;
+        }
+
+        .profileName{
+            margin-top: 10px;
+            font-size: 28px;
+            font-weight: 500;
+
+        }
+       
+        .profilePic{
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            border:5px solid #febd2f;
+            box-shadow: 0 4px 10px 0 rgba(39, 39, 39, 0.3);
+        }
+
+    }
+
+    
+
+}
