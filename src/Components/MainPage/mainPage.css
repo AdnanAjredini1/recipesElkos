@@ -1,11 +1,12 @@
-.mainPageWrapper{
-    margin-top: 0;
-    display: flex;
-    flex-direction: column;
-    padding-left: 350px;
-    background-color: #f4f2ee;
-    height: 100vh;
-    @media (max-width:880px) {
-        padding-left: 0;
-      }
+.mainPageWrapper {
+  margin-top: 0;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 350px;
+  background-color: #f4f2ee;
+
+  @media (max-width: 880px) {
+    padding-left: 0;
+  }
 }

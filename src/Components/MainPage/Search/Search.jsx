@@ -23,6 +23,7 @@ function Search() {
         />
         <SearchIcon className="searchIcon" />
       </div>
+      <div style={{display:'flex',flexDirection:'row'}}>
       <Link to="/login">
         <div className="logginButtonWrapper">
           <p>Login</p>
@@ -40,6 +41,8 @@ function Search() {
           <span className="hamburger-inner"></span>
         </span>
       </button>
+      </div>
+      
     </div>
   );
 }

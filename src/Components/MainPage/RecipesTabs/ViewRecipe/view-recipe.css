@@ -1,0 +1,24 @@
+.viewRecipeWrapper {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  z-index: 11100;
+  width: 80%;
+  height: 90%;
+  background-color: #ffffff;
+  border-radius: 15px;
+
+  .imageViewRecipe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40%;
+    height: 90%;
+    background-color: rgb(100, 179, 153);
+    border-radius: 15px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}

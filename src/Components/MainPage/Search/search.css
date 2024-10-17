@@ -47,6 +47,11 @@
     background-color: #febd2f;
     box-shadow: 0 4px 10px 0 rgba(254,189,47,0.7 );
     cursor: pointer;
+    @media (max-width:698px) {
+      height: 45px;
+      width: 110px;
+      margin-bottom: -10px;
+    }
     @media (max-width:402px) {
         height: 45px;
       }
