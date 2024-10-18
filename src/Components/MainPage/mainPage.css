@@ -6,7 +6,7 @@
   padding-left: 350px;
   background-color: #f4f2ee;
   height: 100%;
-  min-height: 1000px;
+  min-height: 1500px;
 
   @media (max-width: 880px) {
     padding-left: 0;

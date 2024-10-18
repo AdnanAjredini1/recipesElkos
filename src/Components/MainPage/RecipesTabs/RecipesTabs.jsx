@@ -8,6 +8,7 @@ import ViewRecipe from "./ViewRecipe/ViewRecipe";
 import { useState } from "react";
 function RecipesTabs({ searchQuery }) {
   const [isBackdrop, setIsBackDrop] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   const filteredRecipesData = recipesTabsData.map((tab) => ({
     ...tab,
@@ -22,8 +23,8 @@ function RecipesTabs({ searchQuery }) {
           <div
             className={`viewRecipeWrapper ${!isBackdrop ? "displayNone" : ""}`}
           >
-            <ViewRecipe isBackdrop={isBackdrop} setIsBackDrop={setIsBackDrop} />
-            <div className="backdrop"></div>
+            <ViewRecipe isBackdrop={isBackdrop} setIsBackDrop={setIsBackDrop} image={selectedRecipe?.image}/>
+            <div className="backdrop" onClick={() => setIsBackDrop(false)}></div>
           </div>,
           document.getElementById("viewRecipes")
         )}
@@ -55,6 +56,8 @@ function RecipesTabs({ searchQuery }) {
                     foodName={item.name}
                     setIsBackDrop={setIsBackDrop}
                     isBackdrop={isBackdrop}
+                    image={item.image}
+                    setSelectedRecipe={setSelectedRecipe}
                   />
                 ))}
               </div>
