@@ -5,12 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { hamburgerActions } from "../../../Store/hamburgerButtonSlice";
 import { Link } from "react-router-dom";
 
-function Search() {
+function Search({setSearchQuery}) {
   const isActiveHamburger = useSelector(
     (state) => state.hamburger.isActiveHamburger
   );
   const dispatch = useDispatch();
   console.log("Hamburger is active", isActiveHamburger);
+
+    const handleSearchChange = (e) => {
+      setSearchQuery(e.target.value);
+    }
 
   return (
     <div className="searchLogginWrapper">
@@ -20,6 +24,7 @@ function Search() {
           type="search"
           className="searchInput"
           placeholder="Search recipes..."
+          onChange={handleSearchChange}
         />
         <SearchIcon className="searchIcon" />
       </div>

@@ -6,9 +6,13 @@ import SearchIcon from "../MainPage/Search/search-assets/search-svgrepo-com.svg?
 import CloseIcon from "./mobile-sidenav-assets/close-svgrepo-com.svg?react";
 import { hamburgerActions } from "../../Store/hamburgerButtonSlice";
 
-function MobileSideNav() {
+function MobileSideNav({ setSearchQuery }) {
   const isMobile = useSelector((state) => state.hamburger.isActiveHamburger);
   const dispatch = useDispatch();
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <div className={`mobileSideNavWrapper ${isMobile ? "isMobileClass" : ""}`}>
       <CloseIcon
@@ -27,6 +31,7 @@ function MobileSideNav() {
             type="search"
             className="searchInput"
             placeholder="Search recipes..."
+            onChange={handleSearchChange}
           />
           <SearchIcon className="searchIcon" />
         </div>

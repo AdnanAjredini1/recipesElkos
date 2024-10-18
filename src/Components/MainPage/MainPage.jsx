@@ -1,15 +1,17 @@
-import './mainPage.css'
-import RecipiesTabs from './RecipesTabs/RecipesTabs';
+import { useState } from "react";
+import "./mainPage.css";
+import RecipiesTabs from "./RecipesTabs/RecipesTabs";
 import Search from "./Search/Search";
 
-function MainPage() {
-    return (
-        <div className="mainPageWrapper">
-            <Search />
-            <RecipiesTabs />
-          
-        </div>
-    );
+function MainPage({searchQuery, setSearchQuery}) {
+  
+
+  return (
+    <div className="mainPageWrapper">
+      <Search setSearchQuery={setSearchQuery} />
+      <RecipiesTabs searchQuery={searchQuery} />
+    </div>
+  );
 }
 
 export default MainPage;

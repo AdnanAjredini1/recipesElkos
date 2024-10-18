@@ -6,18 +6,28 @@ import RecipesCard from "./RecipesCard/RecipesCard";
 import { createPortal } from "react-dom";
 import ViewRecipe from "./ViewRecipe/ViewRecipe";
 import { useState } from "react";
-function RecipesTabs() {
+function RecipesTabs({ searchQuery }) {
   const [isBackdrop, setIsBackDrop] = useState(false);
+
+  const filteredRecipesData = recipesTabsData.map((tab) => ({
+    ...tab,
+    items: tab.items.filter((item) =>
+      item.name.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
+    ),
+  }));
   return (
     <div className="recipesTabsWrapper">
-     {isBackdrop &&    createPortal(
-        <div className={`viewRecipeWrapper ${!isBackdrop ? 'displayNone':''}`}>
-          <ViewRecipe isBackdrop={isBackdrop} setIsBackDrop={setIsBackDrop}/>
-          <div className="backdrop"></div>
-        </div>,
-        document.getElementById("viewRecipes")
-      )}
-   
+      {isBackdrop &&
+        createPortal(
+          <div
+            className={`viewRecipeWrapper ${!isBackdrop ? "displayNone" : ""}`}
+          >
+            <ViewRecipe isBackdrop={isBackdrop} setIsBackDrop={setIsBackDrop} />
+            <div className="backdrop"></div>
+          </div>,
+          document.getElementById("viewRecipes")
+        )}
+
       <div className="firstRow">
         <p className="bigTitle">
           Learn, Cook, <span>&</span> Eat your food
@@ -30,17 +40,22 @@ function RecipesTabs() {
       <div className="secondRow">
         <Tabs className="tabsWrapper">
           <TabList className="tabsListWrp">
-            {recipesTabsData.map((tab) => (
+            {filteredRecipesData.map((tab) => (
               <Tab className="tabi" key={tab.label}>
                 {tab.label}
               </Tab>
             ))}
           </TabList>
-          {recipesTabsData.map((tab) => (
+          {filteredRecipesData.map((tab) => (
             <TabPanel key={tab.label}>
               <div className="cardWrapper">
                 {tab.items.map((item) => (
-                  <RecipesCard key={item.name} foodName={item.name} setIsBackDrop={setIsBackDrop} isBackdrop={isBackdrop} />
+                  <RecipesCard
+                    key={item.name}
+                    foodName={item.name}
+                    setIsBackDrop={setIsBackDrop}
+                    isBackdrop={isBackdrop}
+                  />
                 ))}
               </div>
             </TabPanel>
