@@ -12,16 +12,17 @@ function RecipesCard({
   };
   return (
     <div className="recipesCardWrapper">
-      <div className="recipesCardImg" style={{ content: `url(${image})` }}>
-        {" "}
-      </div>
+      <div
+        className="recipesCardImg"
+        style={{ content: `url(${image})` }}
+      ></div>
       <div className="cardLine"></div>
       <div className="minsAndViewWrapper">
         <p>20mins</p>
         <button
           onClick={() => {
             setIsBackDrop(true);
-            setSelectedRecipe({image});
+            setSelectedRecipe({ image });
           }}
         >
           View Recipe
