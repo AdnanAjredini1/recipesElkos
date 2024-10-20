@@ -21,6 +21,9 @@
     
     gap: 10px;
   }
+  @media (max-width:400px) {
+    height: 95%;
+  }
 
   .commentsWrapper{
     position: absolute;
@@ -138,6 +141,9 @@
     align-items: center;
     @media (max-width:1176px) {
         height: 50%;
+      }
+      @media (max-width:450px) {
+        height: 65%;
       }
       .isLike path {
         fill: #e1306c;
