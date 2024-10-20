@@ -188,7 +188,7 @@
         line-height: 35px;
         overflow-y: auto;
         @media (max-width:1072px) {
-            max-height: 150px !important;
+            max-height: 50% !important;
             &::-webkit-scrollbar {
 
                 width: 2px;
