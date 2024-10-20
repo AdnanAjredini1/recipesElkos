@@ -24,7 +24,7 @@ function MobileSideNav({ setSearchQuery }) {
       <div className="sideNavProfileUserWrapper">
         <div className="profilePic"></div>
         <p className="profileName">Filan Filani</p>
-        <p className="profilePosition">Position</p>
+   
       </div>
       <div className="sideNavButtonWrapper">
         <div className="searchWrapper">

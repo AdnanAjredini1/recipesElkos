@@ -9,7 +9,7 @@ function SideNav() {
             <div className="sideNavProfileUserWrapper">
                 <div className='profilePic'></div>
                 <p className='profileName'>Filan Filani</p>
-                <p className='profilePosition'>Positon</p>
+             
             </div>
              <div className='sideNavButtonWrapper'>
              {navSideData.map(button => (

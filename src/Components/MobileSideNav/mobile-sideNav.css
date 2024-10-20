@@ -41,7 +41,7 @@
       }
 
     .sideNavButtonWrapper{
-        margin-top: 40px;
+        margin-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -85,7 +85,7 @@
     }
 
     .sideNavProfileUserWrapper{
-        margin-top: 30px;
+        margin-top: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
