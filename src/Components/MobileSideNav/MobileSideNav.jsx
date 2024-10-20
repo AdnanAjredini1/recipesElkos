@@ -15,6 +15,7 @@ function MobileSideNav({ setSearchQuery }) {
 
   return (
     <div className={`mobileSideNavWrapper ${isMobile ? "isMobileClass" : ""}`}>
+  
       <CloseIcon
         className="closeIcon"
         onClick={() => dispatch(hamburgerActions.setActiveHamburger())}

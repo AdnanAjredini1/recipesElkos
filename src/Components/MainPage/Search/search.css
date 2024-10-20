@@ -1,5 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 
+.addRecipeWrapper{
+
+width: 100%;
+height: 100%;
+position: fixed;
+top: 0;
+left: 0;
+z-index: 555555;
+background: rgba(0, 0, 0, 0.4);
+
+.addRecipeForm{
+  position: absolute;
+  left: 0;
+  right:0;
+  margin-inline: auto;
+  top: 40px;
+  width: 40%;
+  height: 90%;
+  background: #ffffff;
+  border-radius: 15px;
+
+  .closeIconForAdd{
+   
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    &:hover path {
+      stroke: rgba(0, 0, 0, 0.4);
+      fill:rgba(0, 0, 0, 0.4) ;
+      cursor: pointer;
+    }
+  }
+  .formAddRecipeTitle{
+    font-size: 27px;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .formAddRecipeUnderTitle{
+    text-align: center;
+    margin-top: 10px;
+    padding-inline: 10px;
+    color: #817c7c;
+  }
+}
+
+
+}
 .searchLogginWrapper {
   display: flex;
   align-items: center;
@@ -7,6 +58,39 @@
   margin-top:30px;
   justify-content: space-between;
   gap: 20px;
+
+  
+
+  .addRecipeButton{
+ 
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #21ba71;
+    &:hover {
+      background:#b8f4d5;
+    scale: 0.9;
+      .plusIcon path{
+        fill: #21ba71;
+        stroke: #21ba71;
+       
+      }
+    }
+    .plusIcon{
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    
+    }
+    .plusIcon path{
+      fill: #ffffff;
+      stroke: #ffffff;
+     
+    }
+  }
 
   .hamburgerButton{
     margin-right: -10px;

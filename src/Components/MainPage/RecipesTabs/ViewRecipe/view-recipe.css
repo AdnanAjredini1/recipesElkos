@@ -35,6 +35,11 @@
     border-radius: 15px;
 
     .commentsPlace{
+      position: absolute;
+      top: 20px;
+      right: 0;
+      left: 0;
+      bottom: 0;
       /* max-height: 700px;
       overflow-y: auto;
       &::-webkit-scrollbar {
@@ -81,7 +86,8 @@
 
     .mdbRowClass{
       .mdbColClass{
-        max-height: 700px;
+        max-height: 750px;
+        max-width: 100%;
         overflow-y: auto;
         &::-webkit-scrollbar {
   
@@ -115,6 +121,7 @@
         width: 90px;
         height: 50px;
         cursor: pointer;
+        z-index: 10;
     }
 
     .dropDownIcon path {
