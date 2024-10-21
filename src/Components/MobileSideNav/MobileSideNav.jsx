@@ -15,7 +15,6 @@ function MobileSideNav({ setSearchQuery }) {
 
   return (
     <div className={`mobileSideNavWrapper ${isMobile ? "isMobileClass" : ""}`}>
-  
       <CloseIcon
         className="closeIcon"
         onClick={() => dispatch(hamburgerActions.setActiveHamburger())}
@@ -24,7 +23,6 @@ function MobileSideNav({ setSearchQuery }) {
       <div className="sideNavProfileUserWrapper">
         <div className="profilePic"></div>
         <p className="profileName">Filan Filani</p>
-   
       </div>
       <div className="sideNavButtonWrapper">
         <div className="searchWrapper">

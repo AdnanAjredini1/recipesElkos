@@ -17,9 +17,133 @@ background: rgba(0, 0, 0, 0.4);
   margin-inline: auto;
   top: 40px;
   width: 40%;
-  height: 90%;
+  height: 80%;
   background: #ffffff;
   border-radius: 15px;
+
+
+  .inputsWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+    width: 100%;
+    margin-top: 60px;
+    padding-inline: 8%;
+    .formAddButton {
+      border: 1px solid #93f9c6;
+      border-radius:10px; 
+      padding: 8px 30px;
+      font-weight:bold ;
+      background-color: #55cf92;
+      color: #ffffff;
+
+   
+      &:hover {
+        background-color: #21ba71;
+        color: #ffffff;
+        border: 1px solid #21ba71;
+        scale: 1.01;
+        transition: 0.1s ease-in-out;
+       
+      
+      }
+    }
+
+
+    .inputLastRow{
+      display: flex;
+      justify-content: space-between;
+      
+
+      .timeInputWrapper{
+        display: flex;
+        flex-direction: column;
+       
+
+        .inputTime{
+          border: 1px solid rgba(0, 0, 0, 0.4);
+          border-radius: 5px;
+        }
+
+        .timeLabel{
+          color: rgba(0, 0, 0, 0.4);
+
+        }
+      }
+      
+      .selectCategoryInputWrapper{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        .selectCategoryLabel{
+          color: rgba(0, 0, 0, 0.6);
+        }
+
+        .selectCategorySelect{
+          background: #ffffff;
+          border: 1px solid rgba(0, 0, 0, 0.4);
+          border-radius: 5px;
+          padding: 2px 5px;
+        }
+      }
+    }
+
+    .descriptionInputWrapper{
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+       .descriptionLabel{
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 18px;
+       }
+
+       .descriptionInput{
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        padding: 10px;
+        box-sizing: border-box; 
+        vertical-align: top; 
+        height: 18vh;
+        max-width: 100%;
+        overflow-y: auto;
+       }
+    }
+
+
+  .inputsFirstRow{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .imageInputWrapper{
+      width: 200px;
+
+    
+      .imageLabel{
+        color: rgba(0, 0, 0, 0.4);
+      }
+    }
+    .inputTitleWrapper{
+      width: 45%;
+      .labelInputTitle{
+     color: rgba(0, 0, 0, 0.4);
+      }
+      .inputTitleAddRecipe{
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        padding: 10px 18px;
+        
+ 
+     }
+    }
+    
+  }
+    
+   
+
+  }
+
+ 
 
   .closeIconForAdd{
    
@@ -59,11 +183,13 @@ background: rgba(0, 0, 0, 0.4);
   justify-content: space-between;
   gap: 20px;
 
-  
+  .displayNone{
+    display: none;
+  }
 
   .addRecipeButton{
  
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 70px;
@@ -90,6 +216,10 @@ background: rgba(0, 0, 0, 0.4);
       stroke: #ffffff;
      
     }
+  }
+
+  .displayNone{
+    display: none;
   }
 
   .hamburgerButton{

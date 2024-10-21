@@ -7,11 +7,28 @@ import { Provider } from "react-redux";
 import store from "./Store/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
+import Favorites from "./Components/Favorites/Favorites";
+import MainPage from "./Components/MainPage/MainPage";
+import MyRecipes from "./Components/MyRecipes/MyRecipes";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children:[
+      {
+        path:'/favorites',
+        element:<Favorites />
+      },
+      {
+        path:'/',
+        element:<MainPage />
+      },
+      {
+        path:'/my-recipes',
+        element:<MyRecipes />
+      }
+    ]
   },
   {
     path:'/login',

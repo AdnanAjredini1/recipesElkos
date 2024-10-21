@@ -4,6 +4,7 @@ import MobileSideNav from "./Components/MobileSideNav/MobileSideNav";
 import SideNav from "./Components/SideNav/SideNav";
 import { useDispatch, useSelector } from "react-redux";
 import { hamburgerActions } from "./Store/hamburgerButtonSlice";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,8 +29,9 @@ function App() {
         onClick={() => dispatch(hamburgerActions.setActiveHamburger())}
       ></div>
       <SideNav />
-      <MobileSideNav setSearchQuery={setSearchQuery} />
-      <MainPage searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <MobileSideNav  />
+      {/* <MainPage searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> */}
+      <Outlet />
     </div>
   );
 }

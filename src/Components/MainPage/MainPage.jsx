@@ -3,9 +3,9 @@ import "./mainPage.css";
 import RecipiesTabs from "./RecipesTabs/RecipesTabs";
 import Search from "./Search/Search";
 
-function MainPage({searchQuery, setSearchQuery}) {
+function MainPage() {
   
-
+  const [searchQuery, setSearchQuery] = useState("");
   return (
     <div className="mainPageWrapper">
       <Search setSearchQuery={setSearchQuery} />
