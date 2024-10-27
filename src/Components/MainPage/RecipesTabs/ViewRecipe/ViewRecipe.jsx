@@ -12,14 +12,30 @@ import {
   MDBCardImage,
   MDBCol,
   MDBContainer,
-  MDBIcon,
   MDBInput,
   MDBRow,
 } from "mdb-react-ui-kit";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
-function ViewRecipe({ isBackdrop, setIsBackDrop, image }) {
+function ViewRecipe({
+  isBackdrop,
+  setIsBackDrop,
+  image,
+  foodName,
+  foodDescription,
+  post_id,
+}) {
   const [like, setLike] = useState(false);
   const [isCommentsFieldOpen, setIsCommentsFieldOpen] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [commented, setIsCommented] = useState(false);
+
+  const userProfile = useSelector((state) => state.userProfile.user);
+  const user_id = userProfile.userId;
+
+  const postId = post_id;
 
   useEffect(() => {
     if (isBackdrop) {
@@ -32,6 +48,107 @@ function ViewRecipe({ isBackdrop, setIsBackDrop, image }) {
       document.body.style.overflow = "auto";
     };
   }, [isBackdrop]);
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+
+    const payload = { post_id: postId, content: newComment };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/comment",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(response.data, "response from auth status");
+      setIsCommented(!commented);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/comments/${postId}`,
+          { withCredentials: true }
+        );
+
+        setComments(response.data);
+        console.log(response.data);
+      } catch (err) {
+        console.error("Error fetching comments:", err);
+      }
+    };
+    fetchComments();
+  }, [postId, commented]);
+
+  const handleLike = async () => {
+    const payload = { post_id: postId };
+
+    try {
+      const response = await axios.post("http://localhost:3001/like", payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      console.log(response.data);
+      setLike(true);
+    } catch (err) {
+      console.log(err);
+      console.log("delete failed");
+    }
+  };
+
+  const handleUnLike = async () => {
+    const payload = { post_id: postId };
+
+    try {
+      const response = await axios.delete("http://localhost:3001/like", {
+        data: payload,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      console.log(response.data);
+      setLike(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    const checkIfLiked = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/like/${postId}`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        console.log(response.data);
+
+        if (response.data.isLiked) {
+          setLike(true);
+        } else {
+          setLike(false);
+        }
+      } catch (error) {
+        console.error("Error checking like status:", error);
+      }
+    };
+    checkIfLiked();
+  }, [postId]);
+
   return (
     <div className="viewRecipeWrapper">
       <motion.div
@@ -67,214 +184,49 @@ function ViewRecipe({ isBackdrop, setIsBackDrop, image }) {
                   }}
                 >
                   <MDBCardBody>
-                    <MDBInput
-                      wrapperClass="mb-4"
-                      placeholder="Type comment..."
-                      label="+ Leave a comment"
-                    >
-                      <SendIcon
-                        width={30}
-                        height={30}
-                        style={{
-                          position: "absolute",
-                          right: "10px",
-                          top: "5px",
-                        }}
-                      />
-                    </MDBInput>
+                    <form onSubmit={handleCommentSubmit} className="mb-4">
+                      <MDBInput
+                        wrapperClass="mb-2"
+                        placeholder="Type comment..."
+                        label="+ Leave a comment"
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                      >
+                        <SendIcon
+                          width={30}
+                          height={30}
+                          style={{
+                            position: "absolute",
+                            right: "10px",
+                            top: "5px",
+                            cursor: "pointer",
+                          }}
+                          onClick={handleCommentSubmit}
+                        />
+                      </MDBInput>
+                    </form>
 
-                    <MDBCard className="mb-4">
-                      <MDBCardBody>
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex flex-row align-items-center">
-                            <MDBCardImage
-                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                              alt="avatar"
-                              width="25"
-                              height="25"
-                            />
-                            <p className="small mb-0 ms-2">Martha</p>
+                    {comments.map((comment, index) => (
+                      <MDBCard className="mb-4" key={index}>
+                        <MDBCardBody>
+                          <div className="d-flex justify-content-between">
+                            <div className="d-flex flex-row align-items-center">
+                              <MDBCardImage
+                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+                                alt="avatar"
+                                width="25"
+                                height="25"
+                              />
+                              <p className="small mb-0 ms-2">User</p>
+                            </div>
+                            <div className="d-flex flex-row align-items-center"></div>
                           </div>
-                          <div className="d-flex flex-row align-items-center">
-                            <p className="small text-muted mb-0">Upvote?</p>
-                            <MDBIcon
-                              far
-                              icon="thumbs-up mx-2 fa-xs text-black"
-                              style={{ marginTop: "-0.16rem" }}
-                            />
-                            <p className="small text-muted mb-0">3</p>
-                          </div>
-                        </div>
-                        <p style={{ marginTop: "15px" }}>
-                          Type your note, and hit enter to add it
-                        </p>
-                      </MDBCardBody>
-                    </MDBCard>
-
-                    <MDBCard className="mb-4">
-                      <MDBCardBody>
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex flex-row align-items-center">
-                            <MDBCardImage
-                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                              alt="avatar"
-                              width="25"
-                              height="25"
-                            />
-                            <p className="small mb-0 ms-2">Martha</p>
-                          </div>
-                          <div className="d-flex flex-row align-items-center">
-                            <p className="small text-muted mb-0">Upvote?</p>
-                            <MDBIcon
-                              far
-                              icon="thumbs-up mx-2 fa-xs text-black"
-                              style={{ marginTop: "-0.16rem" }}
-                            />
-                            <p className="small text-muted mb-0">3</p>
-                          </div>
-                        </div>
-                        <p style={{ marginTop: "15px" }}>
-                          Type your note, and hit enter to add it
-                        </p>
-                      </MDBCardBody>
-                    </MDBCard>
-
-                    <MDBCard className="mb-4">
-                      <MDBCardBody>
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex flex-row align-items-center">
-                            <MDBCardImage
-                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                              alt="avatar"
-                              width="25"
-                              height="25"
-                            />
-                            <p className="small mb-0 ms-2">Martha</p>
-                          </div>
-                          <div className="d-flex flex-row align-items-center">
-                            <p className="small text-muted mb-0">Upvote?</p>
-                            <MDBIcon
-                              far
-                              icon="thumbs-up mx-2 fa-xs text-black"
-                              style={{ marginTop: "-0.16rem" }}
-                            />
-                            <p className="small text-muted mb-0">3</p>
-                          </div>
-                        </div>
-                        <p style={{ marginTop: "15px" }}>
-                          Type your note, and hit enter to add it
-                        </p>
-                      </MDBCardBody>
-                    </MDBCard>
-
-                    <MDBCard className="mb-4">
-                      <MDBCardBody>
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex flex-row align-items-center">
-                            <MDBCardImage
-                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                              alt="avatar"
-                              width="25"
-                              height="25"
-                            />
-                            <p className="small mb-0 ms-2">Martha</p>
-                          </div>
-                          <div className="d-flex flex-row align-items-center">
-                            <p className="small text-muted mb-0">Upvote?</p>
-                            <MDBIcon
-                              far
-                              icon="thumbs-up mx-2 fa-xs text-black"
-                              style={{ marginTop: "-0.16rem" }}
-                            />
-                            <p className="small text-muted mb-0">3</p>
-                          </div>
-                        </div>
-                        <p style={{ marginTop: "15px" }}>
-                          Type your note, and hit enter to add it
-                        </p>
-                      </MDBCardBody>
-                    </MDBCard>
-
-                    <MDBCard className="mb-4">
-                      <MDBCardBody>
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex flex-row align-items-center">
-                            <MDBCardImage
-                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
-                              alt="avatar"
-                              width="25"
-                              height="25"
-                            />
-                            <p className="small mb-0 ms-2">Johny</p>
-                          </div>
-                          <div className="d-flex flex-row align-items-center">
-                            <p className="small text-muted mb-0">Upvote?</p>
-                            <MDBIcon
-                              far
-                              icon="thumbs-up mx-2 fa-xs text-black"
-                              style={{ marginTop: "-0.16rem" }}
-                            />
-                            <p className="small text-muted mb-0">4</p>
-                          </div>
-                        </div>
-                        <p style={{ marginTop: "15px" }}>
-                          Type your note, and hit enter to add it
-                        </p>
-                      </MDBCardBody>
-                    </MDBCard>
-
-                    <MDBCard className="mb-4">
-                      <MDBCardBody>
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex flex-row align-items-center">
-                            <MDBCardImage
-                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp"
-                              alt="avatar"
-                              width="25"
-                              height="25"
-                            />
-                            <p className="small mb-0 ms-2">Mary Kate</p>
-                          </div>
-                          <div className="d-flex flex-row align-items-center text-primary">
-                            <p className="small mb-0">Upvoted</p>
-                            <MDBIcon
-                              fas
-                              icon="thumbs-up mx-2 fa-xs"
-                              style={{ marginTop: "-0.16rem" }}
-                            />
-                            <p className="small mb-0">2</p>
-                          </div>
-                        </div>
-                        <p style={{ marginTop: "15px" }}>
-                          Type your note, and hit enter to add it
-                        </p>
-                      </MDBCardBody>
-                    </MDBCard>
-
-                    <MDBCard className="mb-4">
-                      <MDBCardBody>
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex flex-row align-items-center">
-                            <MDBCardImage
-                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
-                              alt="avatar"
-                              width="25"
-                              height="25"
-                            />
-                            <p className="small mb-0 ms-2">Johny</p>
-                          </div>
-                          <div className="d-flex flex-row align-items-center">
-                            <p className="small text-muted mb-0">Upvote?</p>
-                            <MDBIcon
-                              far
-                              icon="thumbs-up mx-2 fa-xs text-black"
-                              style={{ marginTop: "-0.16rem" }}
-                            />
-                            <p className="small text-muted mb-0"></p>
-                          </div>
-                        </div>
-                      </MDBCardBody>
-                    </MDBCard>
+                          <p style={{ marginTop: "15px" }}>
+                            {comment.content}{" "}
+                          </p>
+                        </MDBCardBody>
+                      </MDBCard>
+                    ))}
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
@@ -297,7 +249,7 @@ function ViewRecipe({ isBackdrop, setIsBackDrop, image }) {
         ></div>
         <FavoriteIcon
           className={`favoriteIcon  ${like ? "isLike" : ""}`}
-          onClick={() => setLike(!like)}
+          onClick={like ? handleUnLike : handleLike}
           alt="Like"
         />
       </div>
@@ -310,41 +262,17 @@ function ViewRecipe({ isBackdrop, setIsBackDrop, image }) {
         >
           <CloseButton className="closeButton" />
         </button>
-        <p className="viewTitleFood">Caesar Salad</p>
-        <p className="recipeDescription">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <p className="viewTitleFood">{foodName}</p>
+        <p className="recipeDescription">{foodDescription}</p>
         <FavoriteIcon
           className={`favoriteIcon2  ${like ? "isLike" : ""}`}
-          onClick={() => setLike(!like)}
+          onClick={like ? handleUnLike : handleLike}
           alt="Like"
         />
         <CommentsIcon
           className="commentsIcon"
           onClick={() => setIsCommentsFieldOpen(true)}
         />
-        {/* <div className="comments">
-          <form className="sendCommentForm">
-            <input type="search" className="sendInput" placeholder="Write your comment here..." />
-            <button className="sendSubmitButton" type="submit">
-                <SendIcon className="sendIcon" />
-            </button>
-
-          </form>
-          <p>fsdfasdfdfdf</p>
-          <p>fsdfasdfdfdf</p> <p>fsdfasdfdfdf</p> <p>fsdfasdfdfdf</p>
-          <p>fsdfasdfdfdf</p>
-          <p>fsdfasdfdfdf</p> <p>fsdfasdfdfdf</p> <p>fsdfasdfdfdf</p>
-          <p>fsdfasdfdfdf</p> <p>fsdfasdfdfdf</p>
-          <p>fsdfasdfdfdf</p> <p>fsdfasdfdfdf</p> <p>fsdfasdfdfdf</p>
-          <p>fsdfasdfdfdf</p>
-        </div> */}
       </div>
     </div>
   );

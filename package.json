@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
+    "axios": "^1.7.7",
     "framer-motion": "^11.11.9",
     "hamburgers": "^1.2.1",
     "mdb-react-ui-kit": "^9.0.0",

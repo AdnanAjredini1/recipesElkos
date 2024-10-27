@@ -1,21 +1,66 @@
 import "./recipesTabs.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { recipesTabsData } from "./recipesTabData";
 import RecipesCard from "./RecipesCard/RecipesCard";
 import { createPortal } from "react-dom";
 import ViewRecipe from "./ViewRecipe/ViewRecipe";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 function RecipesTabs({ searchQuery }) {
   const [isBackdrop, setIsBackDrop] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [recipeTabsDataa, setRecipeTabsDataa] = useState([]);
+ 
 
-  const filteredRecipesData = recipesTabsData.map((tab) => ({
-    ...tab,
-    items: tab.items.filter((item) =>
-      item.name.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
-    ),
-  }));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/api/posts", {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        });
+        setRecipeTabsDataa(response.data);
+        console.log(response.data, "response from the posts ================== ==================== ================= ==============");
+        
+        
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const groupedRecipesData = recipeTabsDataa.reduce(
+    (acc, recipe) => {
+   
+      const { category } = recipe;
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(recipe);
+
+      acc["All"].push(recipe);
+
+      return acc;
+    },
+    { All: [] }
+  );
+
+ 
+
+  
+  const filteredRecipesData = Object.entries(groupedRecipesData).map(
+    ([category, items]) => ({
+      label: category,
+      items: items.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      ),
+    })
+  );
+
   return (
     <div className="recipesTabsWrapper">
       {isBackdrop &&
@@ -23,7 +68,14 @@ function RecipesTabs({ searchQuery }) {
           <div
             className={`viewRecipeWrapper ${!isBackdrop ? "displayNone" : ""}`}
           >
-            <ViewRecipe isBackdrop={isBackdrop} setIsBackDrop={setIsBackDrop} image={selectedRecipe?.image}/>
+            <ViewRecipe
+              isBackdrop={isBackdrop}
+              setIsBackDrop={setIsBackDrop}
+              image={selectedRecipe?.image}
+              foodName={selectedRecipe.foodName}
+              foodDescription={selectedRecipe.foodDescription}
+              post_id={selectedRecipe.post_id}
+            />
             <div className="backdrop" onClick={() => setIsBackDrop(false)}></div>
           </div>,
           document.getElementById("viewRecipes")
@@ -34,7 +86,7 @@ function RecipesTabs({ searchQuery }) {
           Learn, Cook, <span>&</span> Eat your food
         </p>
         <div className="numberOfRecipesWrapper">
-          <p className="num">8</p>
+          <p className="num">{recipeTabsDataa.length}</p>
           <p className="text">Recipes</p>
         </div>
       </div>
@@ -51,13 +103,17 @@ function RecipesTabs({ searchQuery }) {
             <TabPanel key={tab.label}>
               <div className="cardWrapper">
                 {tab.items.map((item) => (
+                  
                   <RecipesCard
-                    key={item.name}
-                    foodName={item.name}
+                    key={item.post_id}
+                    post_id={item.post_id}
+                    foodName={item.title}
                     setIsBackDrop={setIsBackDrop}
                     isBackdrop={isBackdrop}
-                    image={item.image}
+                    image={item.post_image}
                     setSelectedRecipe={setSelectedRecipe}
+                    time={item.cooking_time.seconds}
+                    foodDescription={item.content}
                   />
                 ))}
               </div>

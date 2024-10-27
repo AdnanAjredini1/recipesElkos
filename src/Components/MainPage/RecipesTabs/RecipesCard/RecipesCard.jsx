@@ -6,9 +6,11 @@ function RecipesCard({
   setIsBackDrop,
   image,
   setSelectedRecipe,
+  post_id,
+  foodDescription
 }) {
   const handleViewRecipe = () => {
-    setSelectedRecipe({ image, foodName });
+    setSelectedRecipe({ image, foodName, time, post_id });
   };
   return (
     <div className="recipesCardWrapper">
@@ -18,11 +20,11 @@ function RecipesCard({
       ></div>
       <div className="cardLine"></div>
       <div className="minsAndViewWrapper">
-        <p>20mins</p>
+      <p>{time ? `${time} mins` : "20 mins"}</p>
         <button
           onClick={() => {
             setIsBackDrop(true);
-            setSelectedRecipe({ image });
+            setSelectedRecipe({ image,foodName ,post_id, foodDescription});
           }}
         >
           View Recipe
