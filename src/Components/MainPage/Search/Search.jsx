@@ -11,6 +11,7 @@ import { isLoggedInActions } from "../../../Store/isLoggedIn";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { userProfileActions } from "../../../Store/userProfileSlice";
+import { isPostedActions } from "../../../Store/isPostedSlice";
 
 function Search({ setSearchQuery }) {
   const isActiveHamburger = useSelector(
@@ -18,6 +19,9 @@ function Search({ setSearchQuery }) {
   );
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.userProfile.user);
+  const isPosted = useSelector(state => state.isPosted.isPosted);
+  console.log(isPosted, "isPosted there =============================  ================= ========================");
+  
 
   console.log(userProfile.userName, "usernam from userProfileSlice");
 
@@ -48,6 +52,11 @@ function Search({ setSearchQuery }) {
       [name]: files ? files[0] : value,
     }));
   };
+
+
+  const onAddHandler = () => {
+    dispatch(isPostedActions.setIsPosted());
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -208,7 +217,7 @@ function Search({ setSearchQuery }) {
                     onChange={handleChange}
                   />
                 </div>
-                <button type="submit" className="formAddButton">Add</button>
+                <button type="submit" className="formAddButton" onClick={onAddHandler}>Add</button>
               </div>
             </form>
           </div>,

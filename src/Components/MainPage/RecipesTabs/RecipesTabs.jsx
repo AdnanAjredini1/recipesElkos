@@ -6,12 +6,18 @@ import { createPortal } from "react-dom";
 import ViewRecipe from "./ViewRecipe/ViewRecipe";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function RecipesTabs({ searchQuery }) {
   const [isBackdrop, setIsBackDrop] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [recipeTabsDataa, setRecipeTabsDataa] = useState([]);
  
+  const isPosted = useSelector(state => state.isPosted.isPosted);
+
+
+  console.log(isPosted, "isPosted from RecipeTabs =======================================");
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +37,7 @@ function RecipesTabs({ searchQuery }) {
       }
     };
     fetchData();
-  }, []);
+  }, [isPosted]);
 
   const groupedRecipesData = recipeTabsDataa.reduce(
     (acc, recipe) => {
