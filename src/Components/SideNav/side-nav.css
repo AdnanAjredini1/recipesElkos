@@ -14,6 +14,59 @@
     @media (max-width:880px) {
         display: none;
       }
+      .notificationsWrapper{
+        position: absolute;
+        left:10px;
+        top:15px;
+        cursor: pointer;
+        
+
+        .dropDownMenuWrapper{
+            width: 300px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+            padding: 10px 4px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            max-height: 450px !important;
+            overflow-y: auto !important;
+        &::-webkit-scrollbar {
+  
+          width: 2px;
+          height: 10px;
+      }
+  
+      &::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 5px #a1aec4;
+          border-radius: 3px;
+      }
+  
+      &::-webkit-scrollbar-thumb {
+          background-color: #aeb8c9;
+          border-radius: 3px;
+      }
+        }
+        
+       
+
+        .notificationsIconWrapper{
+            background: #ffffff;
+            box-shadow: none;
+            width: 80px;
+            height: 65px;
+            &:hover{
+                background: #ffffff;
+                box-shadow: none;
+            }
+
+          
+            .notificationIcon{
+                position: absolute;
+            }
+            
+        }
+
+        
+       
+      }
 
     .sideNavButtonWrapper{
         margin-top: 30px;

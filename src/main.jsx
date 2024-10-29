@@ -14,6 +14,7 @@ import LoginSignUpWrapper from "./Pages/LoginPage/LoginSignUpWrapper";
 import SignUp from "./Pages/LoginPage/SignUp/SignUp";
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",

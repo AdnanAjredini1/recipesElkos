@@ -34,6 +34,8 @@ function ViewRecipe({
 
   const userProfile = useSelector((state) => state.userProfile.user);
   const user_id = userProfile.userId;
+  const userName = userProfile.userName;
+  
 
   const postId = post_id;
 
@@ -99,6 +101,24 @@ function ViewRecipe({
         },
         withCredentials: true,
       });
+      const notificationPayload = {
+        userId: user_id, 
+        message: `${userName} liked your post!`,
+        type: "like",
+        postId: postId
+    };
+    const responseFromNotifications = await axios.post(
+        "http://localhost:3001/notification", 
+        notificationPayload, 
+        {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        }
+    );
+     console.log(responseFromNotifications, "responseFromNotifications is thereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+     
       console.log(response.data);
       setLike(true);
     } catch (err) {
@@ -212,12 +232,13 @@ function ViewRecipe({
                           <div className="d-flex justify-content-between">
                             <div className="d-flex flex-row align-items-center">
                               <MDBCardImage
-                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+                                src={comment.user_image}
                                 alt="avatar"
-                                width="25"
-                                height="25"
+                                width="35"
+                                height="35"
+                               
                               />
-                              <p className="small mb-0 ms-2">User</p>
+                              <p className="small mb-0 ms-2">{comment.username}</p>
                             </div>
                             <div className="d-flex flex-row align-items-center"></div>
                           </div>

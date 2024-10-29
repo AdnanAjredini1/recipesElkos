@@ -5,21 +5,31 @@ import { navSideData } from "./sideNavData";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { isLoggedInActions } from "../../Store/isLoggedIn";
+import NotificationsIcon from "./sideNav-assets/notifications-svgrepo-com.svg?react";
 import axios from "axios";
+import {
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+} from "mdb-react-ui-kit";
+import { notificationActions } from "../../Store/notificationNumSlice";
 
 function SideNav() {
   const [user, setUser] = useState({
     name: "",
     profileImage: "",
   });
-  const userProfile = useSelector(state => state.userProfile)
+  const { notifications, notificationNum } = useSelector(
+    (state) => state.notification
+  );
+  const userProfile = useSelector((state) => state.userProfile);
   const isLoggedIn = useSelector((state) => state.isLoggedIn.isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onClickLogout = async () => {
-     
-     try {
+    try {
       const response = await axios.get("http://localhost:3001/logout", {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -28,14 +38,12 @@ function SideNav() {
       });
 
       console.log(response);
-      dispatch(isLoggedInActions.setIsLoggedIn(response.data.success))
-      navigate('/')
-      
-     } catch (err) {
+      dispatch(isLoggedInActions.setIsLoggedIn(response.data.success));
+      navigate("/");
+    } catch (err) {
       console.log(err);
-      
-     }
-  }
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,7 +54,6 @@ function SideNav() {
           },
           withCredentials: true,
         });
-        console.log(response.data, "response from auth status sidenav");
 
         setUser({
           name: response.data.user.username,
@@ -56,16 +63,110 @@ function SideNav() {
         console.log(err);
       }
     };
+
+    const fetchNotifications = async () => {
+      try {
+        const userId = userProfile.user?.userId;
+        if (!userId) return;
+
+        dispatch(notificationActions.resetNotifications());
+
+        const response = await axios.get(
+          `http://localhost:3001/notification/${userId}`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        console.log(response.data, "Fetched notifications from API");
+
+        if (Array.isArray(response.data)) {
+          response.data.forEach((notification) => {
+            dispatch(notificationActions.addNotification(notification));
+          });
+          const unreadNotifications = response.data.filter(
+            (notification) => notification.read === false
+          );
+
+          dispatch(
+            notificationActions.setNotificationNum(unreadNotifications.length)
+          );
+        } else {
+          console.error("Unexpected response structure", response.data);
+        }
+      } catch (err) {
+        console.error("Error fetching notifications:", err.message);
+      }
+    };
+
     fetchData();
-  }, []);
+    if (isLoggedIn) {
+      fetchNotifications();
+      const intervalId = setInterval(fetchNotifications, 10000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [isLoggedIn, userProfile.user.userId, dispatch]);
+
+  const handleMarkAllAsRead = async () => {
+    try {
+      await axios.put(
+        "http://localhost:3001/markAsRead",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("All notifications marked as read");
+      dispatch(notificationActions.setNotificationNum(0));
+    } catch (error) {
+      console.error("Error marking notifications as read:", error);
+    }
+  };
 
   return (
     <div className="sideNavWrapper">
+      <MDBDropdown
+        className="notificationsWrapper"
+        style={{ display: isLoggedIn ? "flex" : "none" }}
+      >
+        <MDBDropdownToggle
+          className="me-3 hidden-arrow notificationsIconWrapper "
+          onClick={handleMarkAllAsRead}
+        >
+          <NotificationsIcon
+            width={42}
+            height={42}
+            className="notificationIcon"
+          />
+          <span className="badge rounded-pill badge-notification bg-danger notificationNum">
+            {notificationNum}
+          </span>
+        </MDBDropdownToggle>
+        <MDBDropdownMenu className="dropDownMenuWrapper">
+          {notifications.length > 0 ? (
+            notifications.map((notification) => (
+              <MDBDropdownItem
+                key={`${notification.id}-${notification.type}`}
+                style={{ padding: "5px 1px" }}
+              >
+                {notification.message}
+              </MDBDropdownItem>
+            ))
+          ) : (
+            <MDBDropdownItem>No notifications</MDBDropdownItem>
+          )}
+        </MDBDropdownMenu>
+      </MDBDropdown>
       <p className="iconBrand">Chefie</p>
       <div className="sideNavProfileUserWrapper">
         <div
           className="profilePic"
-          style={{ content: isLoggedIn ?`url("${userProfile.user.profilePicture}")` :"" }}
+          style={{
+            content: isLoggedIn
+              ? `url("${userProfile.user.profilePicture}")`
+              : "",
+          }}
         ></div>
         <p
           className="profileName"
