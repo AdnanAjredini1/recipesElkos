@@ -67,6 +67,24 @@ function ViewRecipe({
           withCredentials: true,
         }
       );
+      const notificationPayload = {
+        userId: user_id, 
+        message: `You have a new comment from ${userName} ! `,
+        type: "like",
+        postId: postId
+    };
+      const responseFromNotifications = await axios.post(
+        "http://localhost:3001/notification", 
+        notificationPayload, 
+        {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        }
+    );
+    console.log(responseFromNotifications);
+    
       console.log(response.data, "response from auth status");
       setIsCommented(!commented);
     } catch (err) {
