@@ -16,7 +16,7 @@ import {
 import { notificationActions } from "../../Store/notificationNumSlice";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3001", { withCredentials: true });
+const socket = io("https://recipeback-ijkr.onrender.com", { withCredentials: true });
 
 function SideNav() {
   const [user, setUser] = useState({
