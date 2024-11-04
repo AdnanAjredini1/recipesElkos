@@ -22,7 +22,7 @@ function MobileSideNav({ setSearchQuery }) {
   const onClickLogout = async () => {
      
     try {
-     const response = await axios.get("http://localhost:3001/logout", {
+     const response = await axios.get("https://recipeback-ijkr.onrender.com/logout", {
        headers: {
          "Content-Type": "multipart/form-data",
        },

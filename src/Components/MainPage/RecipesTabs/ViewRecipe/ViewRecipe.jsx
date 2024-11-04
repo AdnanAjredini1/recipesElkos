@@ -58,7 +58,7 @@ function ViewRecipe({
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/comment",
+        "https://recipeback-ijkr.onrender.com/comment",
         payload,
         {
           headers: {
@@ -74,7 +74,7 @@ function ViewRecipe({
         postId: postId
     };
       const responseFromNotifications = await axios.post(
-        "http://localhost:3001/notification", 
+        "https://recipeback-ijkr.onrender.com/notification", 
         notificationPayload, 
         {
             headers: {
@@ -96,7 +96,7 @@ function ViewRecipe({
     const fetchComments = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/comments/${postId}`,
+          `https://recipeback-ijkr.onrender.com/comments/${postId}`,
           { withCredentials: true }
         );
 
@@ -113,7 +113,7 @@ function ViewRecipe({
     const payload = { post_id: postId };
 
     try {
-      const response = await axios.post("http://localhost:3001/like", payload, {
+      const response = await axios.post("https://recipeback-ijkr.onrender.com/like", payload, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -126,7 +126,7 @@ function ViewRecipe({
         postId: postId
     };
     const responseFromNotifications = await axios.post(
-        "http://localhost:3001/notification", 
+        "https://recipeback-ijkr.onrender.com/notification", 
         notificationPayload, 
         {
             headers: {
@@ -149,7 +149,7 @@ function ViewRecipe({
     const payload = { post_id: postId };
 
     try {
-      const response = await axios.delete("http://localhost:3001/like", {
+      const response = await axios.delete("https://recipeback-ijkr.onrender.com/like", {
         data: payload,
         headers: {
           "Content-Type": "application/json",
@@ -167,7 +167,7 @@ function ViewRecipe({
     const checkIfLiked = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/like/${postId}`,
+          `https://recipeback-ijkr.onrender.com/like/${postId}`,
           {
             withCredentials: true,
           }

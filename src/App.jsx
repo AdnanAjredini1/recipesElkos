@@ -8,6 +8,7 @@ import { Outlet } from "react-router-dom";
 import axios from "axios";
 import { userProfileActions } from "./Store/userProfileSlice";
 import { isLoggedInActions } from "./Store/isLoggedIn";
+import { io } from "socket.io-client";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,9 +28,10 @@ function App() {
     };
   }, [isMobile]);
   useEffect(() => {
+    const socket = io("http://localhost:3001", { withCredentials: true });
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/auth/status", {
+        const response = await axios.get("https://recipeback-ijkr.onrender.com/auth/status", {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -37,6 +39,9 @@ function App() {
         });
         console.log(response.data, "response from auth status");
         dispatch(isLoggedInActions.setIsLoggedIn(response.data.loggedIn));
+        // if (response.data.loggedIn) {
+        //   socket.emit("registerUser", response.data.user.user_id);
+        // }
        
         dispatch(
           userProfileActions.setUserProfile({

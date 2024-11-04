@@ -16,20 +16,18 @@ function RecipesTabs({ searchQuery }) {
   const isPosted = useSelector(state => state.isPosted.isPosted);
 
 
-  console.log(isPosted, "isPosted from RecipeTabs =======================================");
   
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/posts", {
+        const response = await axios.get("https://recipeback-ijkr.onrender.com/api/posts", {
           headers: {
             "Content-Type": "multipart/form-data",
           },
           withCredentials: true,
         });
         setRecipeTabsDataa(response.data);
-        console.log(response.data, "response from the posts ================== ==================== ================= ==============");
         
         
       } catch (err) {

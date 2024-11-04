@@ -14,6 +14,9 @@ import {
   MDBDropdownItem,
 } from "mdb-react-ui-kit";
 import { notificationActions } from "../../Store/notificationNumSlice";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3001", { withCredentials: true });
 
 function SideNav() {
   const [user, setUser] = useState({
@@ -28,9 +31,11 @@ function SideNav() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+ 
+
   const onClickLogout = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/logout", {
+      const response = await axios.get("https://recipeback-ijkr.onrender.com/logout", {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -48,7 +53,7 @@ function SideNav() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/auth/status", {
+        const response = await axios.get("https://recipeback-ijkr.onrender.com/auth/status", {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -59,6 +64,7 @@ function SideNav() {
           name: response.data.user.username,
           profileImage: response.data.user.user_image,
         });
+        socket.emit("registerUser",response.data.user.user_id );
       } catch (err) {
         console.log(err);
       }
@@ -72,7 +78,7 @@ function SideNav() {
         dispatch(notificationActions.resetNotifications());
 
         const response = await axios.get(
-          `http://localhost:3001/notification/${userId}`,
+          `https://recipeback-ijkr.onrender.com/notification/${userId}`,
           {
             withCredentials: true,
           }
@@ -102,16 +108,23 @@ function SideNav() {
     fetchData();
     if (isLoggedIn) {
       fetchNotifications();
-      const intervalId = setInterval(fetchNotifications, 10000);
+      socket.on("newNotification", (notification) => {
+        // dispatch(notificationActions.addNotification(notification));
+        // dispatch(notificationActions.incrementNotificationNum());
+        console.log(notification, "notification from S O C K E T   99999999999999999999999999999999999999999999999999 ");
+        
+      });
 
-      return () => clearInterval(intervalId);
+      return () => {
+        socket.off("newNotification"); 
+      };
     }
   }, [isLoggedIn, userProfile.user.userId, dispatch]);
 
   const handleMarkAllAsRead = async () => {
     try {
       await axios.put(
-        "http://localhost:3001/markAsRead",
+        "https://recipeback-ijkr.onrender.com/markAsRead",
         {},
         {
           withCredentials: true,
