@@ -16,7 +16,7 @@ import {
 import { notificationActions } from "../../Store/notificationNumSlice";
 import { io } from "socket.io-client";
 
-const socket = io("https://recipeback-ijkr.onrender.com", { withCredentials: true });
+// const socket = io("https://recipeback-ijkr.onrender.com", { withCredentials: true });
 
 function SideNav() {
   const [user, setUser] = useState({
@@ -64,7 +64,7 @@ function SideNav() {
           name: response.data.user.username,
           profileImage: response.data.user.user_image,
         });
-        socket.emit("registerUser",response.data.user.user_id );
+        // socket.emit("registerUser",response.data.user.user_id );
       } catch (err) {
         console.log(err);
       }
@@ -108,16 +108,16 @@ function SideNav() {
     fetchData();
     if (isLoggedIn) {
       fetchNotifications();
-      socket.on("newNotification", (notification) => {
-        // dispatch(notificationActions.addNotification(notification));
-        // dispatch(notificationActions.incrementNotificationNum());
-        console.log(notification, "notification from S O C K E T   99999999999999999999999999999999999999999999999999 ");
+      // socket.on("newNotification", (notification) => {
+      //   // dispatch(notificationActions.addNotification(notification));
+      //   // dispatch(notificationActions.incrementNotificationNum());
+      //   console.log(notification, "notification from S O C K E T   99999999999999999999999999999999999999999999999999 ");
         
-      });
+      // });
 
-      return () => {
-        socket.off("newNotification"); 
-      };
+      // return () => {
+      //   socket.off("newNotification"); 
+      // };
     }
   }, [isLoggedIn, userProfile.user.userId, dispatch]);
 

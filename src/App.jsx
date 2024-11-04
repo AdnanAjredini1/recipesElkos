@@ -28,7 +28,7 @@ function App() {
     };
   }, [isMobile]);
   useEffect(() => {
-    const socket = io("https://recipeback-ijkr.onrender.com", { withCredentials: true });
+    // const socket = io("https://recipeback-ijkr.onrender.com", { withCredentials: true });
     const fetchData = async () => {
       try {
         const response = await axios.get("https://recipeback-ijkr.onrender.com/auth/status", {
