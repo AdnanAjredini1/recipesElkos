@@ -19,7 +19,7 @@ function Favorites() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get(`http://localhost:3001/likes/user/${userProfile.userId}`, {
+            const response = await axios.get(`https://recipeback-ijkr.onrender.com/likes/user/${userProfile.userId}`, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },

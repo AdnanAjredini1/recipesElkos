@@ -70,7 +70,7 @@ function Search({ setSearchQuery }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/posts",
+        "https://recipeback-ijkr.onrender.com/api/posts",
         formData,
         {
           headers: {
@@ -101,7 +101,7 @@ function Search({ setSearchQuery }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/auth/status", {
+        const response = await axios.get("https://recipeback-ijkr.onrender.com/auth/status", {
           headers: {
             "Content-Type": "multipart/form-data",
           },

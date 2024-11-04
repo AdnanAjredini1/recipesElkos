@@ -14,7 +14,7 @@ function MyRecipes() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get(`http://localhost:3001/posts/${userProfile.userId}`, {
+            const response = await axios.get(`https://recipeback-ijkr.onrender.com/posts/${userProfile.userId}`, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
