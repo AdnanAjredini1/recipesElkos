@@ -1,4 +1,4 @@
-import { StrictMode, useState } from "react";
+
 import { createRoot } from "react-dom/client";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "./index.css";
@@ -61,33 +61,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "newUser/login",
-  //   element: (
-  //     <LoginPage
-  //       buttonText="Login"
-  //       loginWithGoogleText="Log in with Google"
-  //       title="Welcome"
-  //       input={input}
-  //       setInput={setInput}
-  //       onSubmit={onSubmitHandlerLogin}
-  //     />
-  //   ),
-  // },
-  // {
-  //   path: "/register",
-  //   element: (
-  //     <LoginPage
-  //       buttonText="Sign Up"
-  //       loginWithGoogleText="Register with Google"
-  //       displayNone="displayNone"
-  //       title="Sign Up"
-  //       input={input}
-  //       setInput={setInput}
-  //       onSubmit={onSubmitHandlerRegister}
-  //     />
-  //   ),
-  //dddddd },
+
 ]);
 
 createRoot(document.getElementById("root")).render(
