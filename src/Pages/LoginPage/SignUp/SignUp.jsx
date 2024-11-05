@@ -49,7 +49,7 @@ function SignUp({
       );
       console.log("Response from api:", response.data);
       if(response.data) {
-        navigate("/new/login");
+        navigate("/login");
       }
     } catch (err) {
       console.error("Error submitting form:", err);

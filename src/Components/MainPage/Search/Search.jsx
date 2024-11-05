@@ -243,7 +243,7 @@ function Search({ setSearchQuery }) {
       </div>
 
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <Link to="/new/login">
+        <Link to="/login">
           <div
             className="logginButtonWrapper"
             style={{ display: isLoggedIn ? "none" : "flex" }}
