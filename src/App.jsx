@@ -32,9 +32,9 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await axios.get("https://recipeback-ijkr.onrender.com/auth/status", {
-          // headers: {
-          //   "Content-Type": "multipart/form-data",
-          // },
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
           withCredentials: true,
         });
         console.log(response.data, "response from auth status");
