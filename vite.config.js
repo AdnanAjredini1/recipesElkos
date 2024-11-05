@@ -8,6 +8,6 @@ export default defineConfig({
   plugins: [react(), svgr(),],
   build: {
     chunkSizeWarningLimit:  
- 1024 // Adjust the limit as needed (in kilobytes)
+ 1024 
   }
 })
