@@ -44,7 +44,7 @@ function SignUp({
       formData.append("username", input.username);
       formData.append("image", profilePicture);
       const response = await axios.post(
-        "https://recipeback-ijkr.onrender.com/api/register",
+        "https://recipe-back-g3egkkkkkkk.vercel.app/api/register",
         formData
       );
       console.log("Response from api:", response.data);

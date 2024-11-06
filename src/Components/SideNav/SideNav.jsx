@@ -35,7 +35,7 @@ function SideNav() {
 
   const onClickLogout = async () => {
     try {
-      const response = await axios.get("https://recipeback-ijkr.onrender.com/logout", {
+      const response = await axios.get("https://recipe-back-g3egkkkkkkk.vercel.app/logout", {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -53,7 +53,7 @@ function SideNav() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://recipeback-ijkr.onrender.com/auth/status", {
+        const response = await axios.get("https://recipe-back-g3egkkkkkkk.vercel.app/auth/status", {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -78,7 +78,7 @@ function SideNav() {
         dispatch(notificationActions.resetNotifications());
 
         const response = await axios.get(
-          `https://recipeback-ijkr.onrender.com/notification/${userId}`,
+          `https://recipe-back-g3egkkkkkkk.vercel.app/notification/${userId}`,
           {
             withCredentials: true,
           }

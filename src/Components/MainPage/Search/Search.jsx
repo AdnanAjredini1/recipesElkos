@@ -70,7 +70,7 @@ function Search({ setSearchQuery }) {
 
     try {
       const response = await axios.post(
-        "https://recipeback-ijkr.onrender.com/api/posts",
+        "https://recipe-back-g3egkkkkkkk.vercel.app/api/posts",
         formData,
         {
           headers: {
@@ -101,7 +101,7 @@ function Search({ setSearchQuery }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://recipeback-ijkr.onrender.com/auth/status", {
+        const response = await axios.get("https://recipe-back-g3egkkkkkkk.vercel.app/auth/status", {
           headers: {
             "Content-Type": "multipart/form-data",
           },
