@@ -31,17 +31,19 @@ function LoginPage({
     e.preventDefault();
   
     try {
-      const response = await fetch("https://recipe-backkllllll.vercel.app/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const response = await axios.post(
+        "https://recipe-backkllllll.vercel.app/api/login",
+        {
           username: input.email,
           password: input.password,
-        }),
-        credentials: "include"  
-      });
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, 
+        }
+      );
   
       const data = await response.json();  
   
