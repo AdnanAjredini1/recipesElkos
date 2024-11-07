@@ -29,40 +29,38 @@ function LoginPage({
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-  
+
+    const payload = { username: input.email, password: input.password };
     try {
       const response = await axios.post(
         "https://recipe-back-two.vercel.app/api/login",
+        payload,
         {
-          username: input.email,
-          password: input.password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true, 
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
         }
       );
-  
-      const data = response.data;  
-  
+
+      console.log(response.data, "response FROM LOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGIN");
+      
+
+      const data = response.data;
+
       if (response.ok) {
         console.log("Login successful:", data);
         dispatch(isLoggedInActions.setIsLoggedIn());
         navigate("/");
       } else {
-        console.log("Login failed:", data.message); 
+        console.log("Login failed:", data.message);
       }
     } catch (err) {
-      console.error("Error submitting form:", err); 
+      console.error("Error submitting form:", err);
     }
   };
 
   const handleClick = () => {
-    window.location.href = 'http://localhost:3000/auth/google'; 
+    window.location.href = "http://localhost:3000/auth/google";
   };
-  
 
   return (
     <div className="loginPageWrapper">
