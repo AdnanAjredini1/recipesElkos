@@ -19,7 +19,7 @@ function Favorites() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get(`https://recipe-backkllllll.vercel.app/likes/user/${userProfile.userId}`, {
+            const response = await axios.get(`https://recipe-back-two.vercel.app/likes/user/${userProfile.userId}`, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },

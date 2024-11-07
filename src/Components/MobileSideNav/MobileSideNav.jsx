@@ -22,7 +22,7 @@ function MobileSideNav({ setSearchQuery }) {
   const onClickLogout = async () => {
      
     try {
-     const response = await axios.get("https://recipe-backkllllll.vercel.app/logout", {
+     const response = await axios.get("https://recipe-back-two.vercel.app/logout", {
        headers: {
          "Content-Type": "multipart/form-data",
        },

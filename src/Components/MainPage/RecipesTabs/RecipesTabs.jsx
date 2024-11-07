@@ -21,7 +21,7 @@ function RecipesTabs({ searchQuery }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://recipe-backkllllll.vercel.app/api/posts", {
+        const response = await axios.get("https://recipe-back-two.vercel.app/api/posts", {
           headers: {
             "Content-Type": "multipart/form-data",
           },
