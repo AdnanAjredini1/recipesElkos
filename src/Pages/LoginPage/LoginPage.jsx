@@ -31,7 +31,7 @@ function LoginPage({
     e.preventDefault();
   
     try {
-      const response = await fetch("https://recipe-back-g3egkkkkkkk.vercel.app/api/login", {
+      const response = await fetch("https://recipe-backkllllll.vercel.app/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
