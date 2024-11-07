@@ -47,6 +47,7 @@ function LoginPage({
       const data = response.data;
 
       if(response.data.message === "Login successful"){
+        console.log("Login successful:", data);
         dispatch(isLoggedInActions.setIsLoggedIn());
         navigate("/");
       }
