@@ -51,20 +51,20 @@ function LoginPage({
 
       const data = response.data;
 
-      // if(response.data.message === "Login successful"){
-      //   console.log("Login successful:", data);
-      //   dispatch(isLoggedInActions.setIsLoggedIn(true));
-      //   navigate("/");
-      // }
-
-      if (response.ok) {
+      if(response.data.message === "Login successful"){
         console.log("Login successful:", data);
-        dispatch(isLoggedInActions.setIsLoggedIn());
-
+        dispatch(isLoggedInActions.setIsLoggedIn(true));
         navigate("/");
-      } else {
-        console.log("Login failed:", data.message);
       }
+
+      // if (response.ok) {
+      //   console.log("Login successful:", data);
+      //   dispatch(isLoggedInActions.setIsLoggedIn());
+
+      //   navigate("/");
+      // } else {
+      //   console.log("Login failed:", data.message);
+      // }
     } catch (err) {
       console.error("Error submitting form:", err);
     }
