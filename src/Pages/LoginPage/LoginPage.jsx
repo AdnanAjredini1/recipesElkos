@@ -30,36 +30,39 @@ function LoginPage({
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const payload = { username: input.email, password: input.password };
-    try {
-      const response = await axios.post(
-        "https://recipe-back-two.vercel.app/api/login",
-        payload,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+   
+  const formData = new FormData();
+  formData.append("username", input.email);
+  formData.append("password", input.password);
+
+  try {
+    const response = await axios.post(
+      "https://recipe-back-two.vercel.app/api/login",
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
 
       console.log(response.data, "response FROM LOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGIN");
       
 
       const data = response.data;
 
-      if(response.data.message === "Login successful"){
-        console.log("Login successful:", data);
-        dispatch(isLoggedInActions.setIsLoggedIn(true));
-        navigate("/");
-      }
-
-      // if (response.ok) {
+      // if(response.data.message === "Login successful"){
       //   console.log("Login successful:", data);
-      //   dispatch(isLoggedInActions.setIsLoggedIn());
-
+      //   dispatch(isLoggedInActions.setIsLoggedIn(true));
       //   navigate("/");
-      // } else {
-      //   console.log("Login failed:", data.message);
       // }
+
+      if (response.ok) {
+        console.log("Login successful:", data);
+        dispatch(isLoggedInActions.setIsLoggedIn());
+
+        navigate("/");
+      } else {
+        console.log("Login failed:", data.message);
+      }
     } catch (err) {
       console.error("Error submitting form:", err);
     }
