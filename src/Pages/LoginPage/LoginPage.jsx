@@ -31,18 +31,20 @@ function LoginPage({
     e.preventDefault();
 
    
-  const formData = new FormData();
-  formData.append("username", input.email);
-  formData.append("password", input.password);
-
-  try {
-    const response = await axios.post(
-      "https://recipe-back-two.vercel.app/api/login",
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
+    const payload = {
+      username: input.email,
+      password: input.password,
+    };
+  
+    try {
+      const response = await axios.post(
+        "https://recipe-back-two.vercel.app/api/login",
+        payload,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
 
       console.log(response.data, "response FROM LOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGINLOGIN");
       
