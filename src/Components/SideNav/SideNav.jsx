@@ -53,7 +53,7 @@ function SideNav() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://recipe-back-two.vercel.app/auth/status", {
+        const response = await axios.get("https://recipeback-ijkr.onrender.com/auth/status", {
           headers: {
             "Content-Type": "multipart/form-data",
           },
