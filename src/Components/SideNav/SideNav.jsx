@@ -35,7 +35,7 @@ function SideNav() {
 
   const onClickLogout = async () => {
     try {
-      const response = await axios.get("https://recipe-back-two.vercel.app/logout", {
+      const response = await axios.get("https://recipeback-ijkr.onrender.com/logout", {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -78,7 +78,7 @@ function SideNav() {
         dispatch(notificationActions.resetNotifications());
 
         const response = await axios.get(
-          `https://recipe-back-two.vercel.app/notification/${userId}`,
+          `https://recipeback-ijkr.onrender.com/notification/${userId}`,
           {
             withCredentials: true,
           }

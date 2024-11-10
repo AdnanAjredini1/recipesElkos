@@ -58,7 +58,7 @@ function ViewRecipe({
 
     try {
       const response = await axios.post(
-        "https://recipe-back-two.vercel.app/comment",
+        "https://recipeback-ijkr.onrender.com/comment",
         payload,
         {
           headers: {
@@ -74,7 +74,7 @@ function ViewRecipe({
         postId: postId
     };
       const responseFromNotifications = await axios.post(
-        "https://recipe-back-two.vercel.app/notification", 
+        "https://recipeback-ijkr.onrender.com/notification", 
         notificationPayload, 
         {
             headers: {
@@ -96,7 +96,7 @@ function ViewRecipe({
     const fetchComments = async () => {
       try {
         const response = await axios.get(
-          `https://recipe-back-two.vercel.app/comments/${postId}`,
+          `https://recipeback-ijkr.onrender.com/comments/${postId}`,
           { withCredentials: true }
         );
 
@@ -113,7 +113,7 @@ function ViewRecipe({
     const payload = { post_id: postId };
 
     try {
-      const response = await axios.post("https://recipe-back-two.vercel.app/like", payload, {
+      const response = await axios.post("https://recipeback-ijkr.onrender.com/like", payload, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -126,7 +126,7 @@ function ViewRecipe({
         postId: postId
     };
     const responseFromNotifications = await axios.post(
-        "https://recipe-back-two.vercel.app/notification", 
+        "https://recipeback-ijkr.onrender.com/notification", 
         notificationPayload, 
         {
             headers: {
@@ -149,7 +149,7 @@ function ViewRecipe({
     const payload = { post_id: postId };
 
     try {
-      const response = await axios.delete("https://recipe-back-two.vercel.app/like", {
+      const response = await axios.delete("https://recipeback-ijkr.onrender.com/like", {
         data: payload,
         headers: {
           "Content-Type": "application/json",
@@ -167,7 +167,7 @@ function ViewRecipe({
     const checkIfLiked = async () => {
       try {
         const response = await axios.get(
-          `https://recipe-back-two.vercel.app/like/${postId}`,
+          `https://recipeback-ijkr.onrender.com/like/${postId}`,
           {
             withCredentials: true,
           }

@@ -70,7 +70,7 @@ function Search({ setSearchQuery }) {
 
     try {
       const response = await axios.post(
-        "https://recipe-back-two.vercel.app/api/posts",
+        "https://recipeback-ijkr.onrender.com/api/posts",
         formData,
         {
           headers: {
