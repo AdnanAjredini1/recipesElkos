@@ -35,7 +35,7 @@ function Favorites() {
           }
         };
         fetchData();
-      }, [location]);
+      }, [userProfile?.userId,location]);
     return (
         <div className=" favoritesWrapper">
         {isBackdrop &&
