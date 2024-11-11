@@ -34,7 +34,7 @@ function Favorites() {
           }
         };
         fetchData();
-      }, []);
+      }, [cardsData]);
     return (
         <div className=" favoritesWrapper">
         {isBackdrop &&
