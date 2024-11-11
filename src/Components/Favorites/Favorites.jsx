@@ -7,6 +7,7 @@ import ViewRecipe from '../MainPage/RecipesTabs/ViewRecipe/ViewRecipe';
 import { createPortal } from 'react-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 
 function Favorites() {
@@ -14,6 +15,7 @@ function Favorites() {
     const [isBackdrop, setIsBackDrop] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const userProfile = useSelector((state) => state.userProfile.user);
+    const location = useLocation();
     
 
     useEffect(() => {
@@ -33,7 +35,7 @@ function Favorites() {
           }
         };
         fetchData();
-      }, []);
+      }, [location]);
     return (
         <div className=" favoritesWrapper">
         {isBackdrop &&
