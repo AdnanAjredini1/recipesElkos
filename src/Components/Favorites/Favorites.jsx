@@ -26,7 +26,6 @@ function Favorites() {
               withCredentials: true,
             });
             setCardsData(response.data);
-            console.log(response.data, "response from the posts 0000================== ==================== ================= ==============");
             
             
           } catch (err) {
@@ -34,7 +33,7 @@ function Favorites() {
           }
         };
         fetchData();
-      }, [cardsData]);
+      }, []);
     return (
         <div className=" favoritesWrapper">
         {isBackdrop &&
